@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require('electron');
-
+const { app, BrowserWindow, ipcRenderer, ipcMain } = require('electron');
+const ffmpeg = require('fluent-ffmpeg');
 // app is the overall running process 
 
 /***
@@ -40,6 +40,16 @@ function createWindow () {
 }
 app.on('ready', createWindow);
 
+// Listen to web event for the event I added on main.js
+ipcMain.on('videoSubmitted', (event, path) => {
+  // Adding ffmpeg probe to get all the metadata from the file path passed from the frontend (HTML Listener)
+  ffmpeg.ffprobe(path, (err, metadata) => {
+    mainWindow.webContents.send('videoDuration',metadata.format.duration);
+    if(err) {
+      console.log(err);
+    }
+  })
+});
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on('window-all-closed', () => {
