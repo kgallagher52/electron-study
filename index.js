@@ -25,7 +25,13 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1000, height: 800, 
     x: 2500, y: 0, // Tell where on the users screen to put the app
-
+    webPreferences: {
+      // --- !! IMPORTANT !! ---
+      // Disable 'contextIsolation' to allow 'nodeIntegration'
+      // 'contextIsolation' defaults to "true" as from Electron v12
+      contextIsolation: false,
+      nodeIntegration: true
+    }
   })  
   mainWindow.loadFile('index.html');
   // Loading the dev tools 
