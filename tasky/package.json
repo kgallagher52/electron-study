@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "watch": "nodemon --exec electron .",
     "electron": "electron ."
   },
   "devDependencies": {
