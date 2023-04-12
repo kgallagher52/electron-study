@@ -22,6 +22,7 @@ Mastering Electron
  
 ## Section Four Status Tray Applications
 [Starter Code](https://github.com/StephenGrider/ElectronCode)
-
 - Tray - is something that is inserted in the top menu where the clock is on OS
+#### Creating trays
+[Tray Docs](https://www.electronjs.org/docs/latest/api/tray)
 

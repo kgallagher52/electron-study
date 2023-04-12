@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray } = require('electron');
+const path = require('path'); // *** Great for getting path for both windows and OSX
 
 let mainWindow;
 
@@ -21,6 +22,12 @@ function createWindow() {
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
   // mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => app.quit());
+
+  /* Adding Tray */
+  const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
+  const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
+  new Tray(iconPath);
+
 }
 
 app.on('ready', createWindow);
