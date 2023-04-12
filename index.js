@@ -86,6 +86,12 @@ const menuTemplate = [
 
       },
       {
+        label: 'Clear Todos',
+        click() {
+          mainWindow.webContents.send('clearToDos')
+        }
+      },
+      {
         label: 'Quit',
         // Testing Mac OS or Windows OS
         accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',

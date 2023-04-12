@@ -21,11 +21,8 @@
     document.querySelector("form").addEventListener("submit", (e) => {
       e.preventDefault();
       const { value } = document.querySelector("#todoName");
-      console.log({ value })
       // Sending path of file to the electron application using IPC
       ipcRenderer.send('todoAdd', value);
-
-
     });
   </script>
 </body>

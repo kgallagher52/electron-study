@@ -16,13 +16,19 @@
   <script>
     const { ipcRenderer } = require('electron');
     // Receive the information coming from Electron
+    const ulElement = document.querySelector('ul');
+
     ipcRenderer.on('todoAdd', (event, todo) => {
       const li = document.createElement('li');
       const text = document.createTextNode(todo);
 
       li.appendChild(text);
-      document.querySelector('ul').appendChild(li);
+      ulElement.appendChild(li);
     });
+
+    ipcRenderer.on('clearToDos', () => {
+      ulElement.innerHTML = ""
+    })
   </script>
 </body>
 
