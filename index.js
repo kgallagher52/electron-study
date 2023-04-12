@@ -1,5 +1,4 @@
-const { app, BrowserWindow, ipcRenderer, ipcMain } = require('electron');
-const ffmpeg = require('fluent-ffmpeg');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 // app is the overall running process 
 
 /***
@@ -18,12 +17,13 @@ const ffmpeg = require('fluent-ffmpeg');
  */
 
 let mainWindow;
+let addWindow;
 
 // Event handler to handle starting application
 
-function createWindow () {
+function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1000, height: 800, 
+    width: 1000, height: 800,
     x: 2500, y: 0, // Tell where on the users screen to put the app
     webPreferences: {
       // --- !! IMPORTANT !! ---
@@ -32,24 +32,90 @@ function createWindow () {
       contextIsolation: false,
       nodeIntegration: true
     }
-  })  
-  mainWindow.loadFile('index.html');
-  // Loading the dev tools 
+  })
+  mainWindow.loadFile('./todo/todo.html');
   mainWindow.webContents.openDevTools();
+  mainWindow.on('closed', () => app.quit());
+
+  // Make sure to build menu first before setting application menu
+  const mainMenu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(mainMenu);
 
 }
-app.on('ready', createWindow);
 
-// Listen to web event for the event I added on main.js
-ipcMain.on('videoSubmitted', (event, path) => {
-  // Adding ffmpeg probe to get all the metadata from the file path passed from the frontend (HTML Listener)
-  ffmpeg.ffprobe(path, (err, metadata) => {
-    mainWindow.webContents.send('videoDuration',metadata.format.duration);
-    if(err) {
-      console.log(err);
+function createAddWindow() {
+  addWindow = new BrowserWindow({
+    width: 300, height: 200,
+    title: 'Add New Todo',
+    parent: mainWindow,
+    webPreferences: {
+      // --- !! IMPORTANT !! ---
+      // Disable 'contextIsolation' to allow 'nodeIntegration'
+      // 'contextIsolation' defaults to "true" as from Electron v12
+      contextIsolation: false,
+      nodeIntegration: true
     }
   })
+  addWindow.loadFile('./todo/todoform.html');
+  addWindow.webContents.openDevTools();
+  // *** We add this so that when the window closes it cleans up the memory to the reference addWindow.
+  addWindow.on('close', () => addWindow = null);
+}
+
+ipcMain.on('todoAdd', (event, todo) => {
+  mainWindow.webContents.send('todoAdd', todo);
+  // Kill this window
+  addWindow.close()
 });
+
+app.on('ready', createWindow);
+
+
+const menuTemplate = [
+  // Each one of these represents single menu item
+  // *** First object in custom menu on OSX gets merged into Electron
+  {
+    label: 'File',
+    // Buttons that should be placed in file 
+    submenu: [
+      {
+        label: 'New Todo',
+        click() {
+          createAddWindow()
+        }
+
+      },
+      {
+        label: 'Quit',
+        // Testing Mac OS or Windows OS
+        accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+        click() {
+          app.quit();
+        }
+      },
+    ]
+  }
+]
+
+// Added this so that our first tab File is not merged into File 
+if (process.platform === 'darwin') {
+  menuTemplate.unshift({ label: '' });
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  menuTemplate.push({
+    label: 'View',
+    submenu: [
+      {
+        label: 'Toggle Developer Tools',
+        accelerator: process.platform === 'darwin' ? 'Command+Alt+I' : 'Ctrl+Shift+I',
+        click(item, focusedWindow) {
+          focusedWindow.toggleDevTools();
+        }
+      }
+    ]
+  })
+}
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on('window-all-closed', () => {

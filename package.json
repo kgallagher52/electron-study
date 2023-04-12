@@ -13,5 +13,8 @@
   "dependencies": {
     "electron": "^24.0.0",
     "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
