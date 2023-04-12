@@ -57,7 +57,7 @@ function createAddWindow() {
     }
   })
   addWindow.loadFile('./todo/todoform.html');
-  addWindow.webContents.openDevTools();
+  // addWindow.webContents.openDevTools();
   // *** We add this so that when the window closes it cleans up the memory to the reference addWindow.
   addWindow.on('close', () => addWindow = null);
 }
@@ -106,6 +106,9 @@ if (process.env.NODE_ENV !== 'production') {
   menuTemplate.push({
     label: 'View',
     submenu: [
+      { // Setting up a shortcut that is pre-defined with Electron to reload the page
+        role: 'reload'
+      },
       {
         label: 'Toggle Developer Tools',
         accelerator: process.platform === 'darwin' ? 'Command+Alt+I' : 'Ctrl+Shift+I',

@@ -25,12 +25,7 @@
       // Sending path of file to the electron application using IPC
       ipcRenderer.send('todoAdd', value);
 
-      // Receive the event of duration from function above
-      ipcRenderer.on('todoAdd', (e, todo) => {
-        console.log(todo)
-        // document.querySelector('#durationResult').innerHTML = `Video Duration is: ${duration}`
-      })
-      debugger;
+
     });
   </script>
 </body>

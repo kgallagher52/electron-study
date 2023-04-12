@@ -10,6 +10,20 @@
 
 <body>
   <h1>My To Do</h1>
+  <ul>
+
+  </ul>
+  <script>
+    const { ipcRenderer } = require('electron');
+    // Receive the information coming from Electron
+    ipcRenderer.on('todoAdd', (event, todo) => {
+      const li = document.createElement('li');
+      const text = document.createTextNode(todo);
+
+      li.appendChild(text);
+      document.querySelector('ul').appendChild(li);
+    });
+  </script>
 </body>
 
 </html>
