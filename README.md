@@ -20,6 +20,8 @@ Mastering Electron
 
  - *** Make sure to add event handler when closing windows so that it cleans up the memory
  
- ## Section Four Status Tray Applications
- [Starter Code](https://github.com/StephenGrider/ElectronCode)
+## Section Four Status Tray Applications
+[Starter Code](https://github.com/StephenGrider/ElectronCode)
+
+- Tray - is something that is inserted in the top menu where the clock is on OS
 
