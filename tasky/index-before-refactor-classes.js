@@ -1,8 +1,8 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray } = require('electron');
 const path = require('path'); // *** Great for getting path for both windows and OSX
-const TimerTray = require('./app/timer_tray');
 
 let mainWindow;
+let tray;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -29,7 +29,31 @@ function createWindow() {
   /* Adding Tray */
   const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
   const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
-  new TimerTray(iconPath, mainWindow);
+  tray = new Tray(iconPath);
+  // Toggle browser window off and on when clicking the icon
+  tray.on('click', (event, bounds) => {
+    // Click event bounds don't hardcode positions (bad practice)
+    const { x, y } = bounds;
+    // Window height and width 
+    const { height, width } = mainWindow.getBounds();
+
+    if (mainWindow.isVisible()) {
+      mainWindow.hide();
+    } else {
+      // Updating Y position for windows since windows it's at the bottom of the screen
+      const yPosition = process.platform === 'darwin' ? y : y - height;
+      // Positioning this specifically to be under the Tray icon that has been clicked.
+      mainWindow.setBounds({
+        x: x - width / 2,
+        y: yPosition,
+        height,
+        width,
+      });
+
+      mainWindow.show();
+    }
+
+  });
 };
 
 app.on('ready', createWindow);
