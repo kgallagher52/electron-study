@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const { app, ipcMain } = require('electron');
 const path = require('path'); // *** Great for getting path for both windows and OSX
 const TimerTray = require('./app/timer_tray');
 const MainWindow = require('./app/main_window');
@@ -34,10 +34,14 @@ app.on('ready', () => {
     show: false,
   });
 
-
   /* Adding Tray */
   const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
   const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
   tray = new TimerTray(iconPath, mainWindow);
 
 });
+
+/* Communicating the time left on the tray */
+ipcMain.on('update-timer', (event, timeLeft) => {
+  tray.setTitle(timeLeft);
+})

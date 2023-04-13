@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-
+import { ipcRenderer } from "electron";
 import Header from "./Header";
 import TasksIndex from "./TasksIndex";
 import TasksShow from "./TasksShow";
@@ -28,8 +28,8 @@ const INITIAL_STATE = {
 
 class App extends Component {
   static defaultProps = {
-    updateTrayText: () => {},
-    onTimerExpire: () => {}
+    updateTrayText: () => { },
+    onTimerExpire: () => { }
   };
 
   constructor(props) {
@@ -48,11 +48,12 @@ class App extends Component {
   };
 
   updateTrayText = title => {
-
+    ipcRenderer.send("update-timer", title);
   };
 
   timerHasExpired = () => {
-
+    /* Clear the timer */
+    ipcRenderer.send("update-timer", "");
   };
 
   // -------- end of electron event handerls ----------
