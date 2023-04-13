@@ -3,7 +3,7 @@ const path = require('path'); // *** Great for getting path for both windows and
 const TimerTray = require('./app/timer_tray');
 const MainWindow = require('./app/main_window');
 
-// Adding this references so Javascript does not clean these up
+/* Adding this references so Javascript does not clean these up */
 let mainWindow;
 let tray;
 
@@ -24,7 +24,9 @@ app.on('ready', () => {
         * 'contextIsolation' defaults to "true" as from Electron v12
        */
       contextIsolation: false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      /* this makes it run all events even if its running in the background */
+      backgroundThrottling: false,
     },
     /* Remove status bar at the top */
     frame: false,
