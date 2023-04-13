@@ -7,6 +7,8 @@ let mainWindow;
 let tray;
 
 function createWindow() {
+  // Hiding icon of electron from the main dock
+  app.dock.hide();
   mainWindow = new BrowserWindow({
     width: 300, height: 500, // This is just a custom size for my use
     x: 2500, y: 0, // Tell where on the users screen to put the app
@@ -24,6 +26,7 @@ function createWindow() {
     // Don't show the browser window on start of application
     show: false,
   })
+
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
 
   // Event for when user clicks out of the window
