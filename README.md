@@ -26,3 +26,10 @@ Mastering Electron
 #### Creating trays
 [Tray Docs](https://www.electronjs.org/docs/latest/api/tray)
 
+#### Bounds System
+ - There are two separate types of bounds
+    - Window Bounds x & y 
+    - Click Event Bounds x & y
+ - *** You have to take into account operating systems when working with bounds
+ 
+

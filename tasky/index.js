@@ -31,7 +31,8 @@ function createWindow() {
   const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
   tray = new Tray(iconPath);
   // Toggle browser window off and on when clicking the icon
-  tray.on('click', () => {
+  tray.on('click', (event, bounds) => {
+    console.log(event, bounds)
     mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
 };
