@@ -25,6 +25,12 @@ function createWindow() {
     show: false,
   })
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
+
+  // Event for when user clicks out of the window
+  mainWindow.on('blur', () => {
+    mainWindow.hide();
+  });
+
   // mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => app.quit());
 

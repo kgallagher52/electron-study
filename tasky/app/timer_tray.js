@@ -1,4 +1,4 @@
-const { Tray } = require('electron');
+const { app, Tray, Menu } = require('electron');
 
 // Creating class for timer tray 
 class TimerTray extends Tray {
@@ -9,6 +9,9 @@ class TimerTray extends Tray {
     this.setToolTip('Timer App');
     // Setting up on click right away from the Tray class
     this.on('click', this.onClick.bind(this));
+    // Adding context menu for the user to quit
+    this.on('right-click', this.onRightClick.bind(this));
+
   }
   // Toggle browser window off and on when clicking the icon
   onClick(event, bounds) {
@@ -32,6 +35,17 @@ class TimerTray extends Tray {
 
       this.mainWindow.show();
     }
+  }
+
+  onRightClick() {
+    const menuConfig = Menu.buildFromTemplate([
+      {
+        label: 'Quit',
+        click: () => app.quit()
+      }
+    ])
+    // this reference comes from the bind which comes from the parent class
+    this.popUpContextMenu(menuConfig);
   }
 }
 
