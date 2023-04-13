@@ -3,6 +3,8 @@ const path = require('path'); // *** Great for getting path for both windows and
 const TimerTray = require('./app/timer_tray');
 
 let mainWindow;
+// Adding this reference so the time tray does not get cleaned up by javascript
+let tray;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -29,7 +31,7 @@ function createWindow() {
   /* Adding Tray */
   const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
   const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
-  new TimerTray(iconPath, mainWindow);
+  tray = new TimerTray(iconPath, mainWindow);
 };
 
 app.on('ready', createWindow);

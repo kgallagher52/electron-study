@@ -32,5 +32,6 @@ Mastering Electron
     - Click Event Bounds x & y
  - *** You have to take into account operating systems when working with bounds
  - setBounds() - starts at the top left of the window
+ - We add variable references so that Javascript does not garbage collect our classes let tray;
 
 

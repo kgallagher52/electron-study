@@ -5,6 +5,8 @@ class TimerTray extends Tray {
   constructor(iconPath, mainWindow) {
     super(iconPath);
     this.mainWindow = mainWindow
+    // Remember that these methods on this are coming from Tray parent class
+    this.setToolTip('Timer App');
     // Setting up on click right away from the Tray class
     this.on('click', this.onClick.bind(this));
   }
