@@ -6,7 +6,7 @@ let tray;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1200, height: 800, // This is just a custom size for my use
+    width: 300, height: 500, // This is just a custom size for my use
     x: 2500, y: 0, // Tell where on the users screen to put the app
     webPreferences: {
       // --- !! IMPORTANT !! ---
@@ -32,8 +32,25 @@ function createWindow() {
   tray = new Tray(iconPath);
   // Toggle browser window off and on when clicking the icon
   tray.on('click', (event, bounds) => {
-    console.log(event, bounds)
-    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
+    // Click event bounds don't hardcode positions (bad practice)
+    const { x, y } = bounds;
+    // Window height and width 
+    const { height, width } = mainWindow.getBounds();
+
+    if (mainWindow.isVisible()) {
+      mainWindow.hide();
+    } else {
+      // Positioning this specifically to be under the Tray icon that has been clicked.
+      mainWindow.setBounds({
+        x: x - width / 2,
+        y: y,
+        height,
+        width,
+      });
+
+      mainWindow.show();
+    }
+
   });
 };
 
