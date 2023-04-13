@@ -31,5 +31,6 @@ Mastering Electron
     - Window Bounds x & y 
     - Click Event Bounds x & y
  - *** You have to take into account operating systems when working with bounds
- 
+ - setBounds() - starts at the top left of the window
+
 

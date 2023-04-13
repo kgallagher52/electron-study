@@ -40,10 +40,12 @@ function createWindow() {
     if (mainWindow.isVisible()) {
       mainWindow.hide();
     } else {
+      // Updating Y position for windows since windows it's at the bottom of the screen
+      const yPosition = process.platform === 'darwin' ? y : y - height;
       // Positioning this specifically to be under the Tray icon that has been clicked.
       mainWindow.setBounds({
         x: x - width / 2,
-        y: y,
+        y: yPosition,
         height,
         width,
       });
