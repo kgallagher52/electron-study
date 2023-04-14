@@ -35,3 +35,11 @@ Mastering Electron
  - We add variable references so that Javascript does not garbage collect our classes let tray;
 
 
+## Section Five Combining Electron with React and Redux
+ - Challenge:Solution
+    - Get content to appear on screen: Wire up basics of electron
+    - Show an interface to receive drag n dropped files: Handled by boilerplate using React and Redux
+    - Once a file is received, show a different window: Handled by boilerplate using React and Redux
+    - Show details about the video waiting to be converted(duration, file format): Use FFMPEG cli
+    - Convert a video: Use FFMPEG cli
+    - Show progress bar of conversion process: Handle feedback from FFMPEG cli
