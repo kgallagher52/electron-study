@@ -2,7 +2,7 @@
 Mastering Electron
 ## Helpful Links
 
-[Forge Auto Updates](https://test.com)
+[Forge Auto Updates](https://www.electronforge.io/)
 ## Section Two Video Info 
 
 [FFMPEG-Fluent](https://www.npmjs.com/package/fluent-ffmpeg)

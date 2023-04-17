@@ -19,3 +19,4 @@ class MainWindow extends BrowserWindow {
 }
 
 module.exports = MainWindow;
+

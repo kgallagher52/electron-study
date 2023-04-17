@@ -1,8 +1,7 @@
-const { app, ipcMain } = require('electron');
+const { app, ipcMain, shell } = require('electron');
 const ffmpeg = require('fluent-ffmpeg');
 const _ = require('lodash');
 const MainWindow = require('./app/main_window');
-const { promises } = require('readline');
 
 /* Adding this references so Javascript does not clean these up */
 let mainWindow;
@@ -57,7 +56,29 @@ ipcMain.on('videos:added', (event, videos) => {
     the application till all as finished 
   */
   Promise.all(promises).then((results) => {
-    console.log(results)
     mainWindow.webContents.send('metadata:complete', results);
   });
 })
+
+ipcMain.on('conversion:start', (event, videos) => {
+  _.each(videos, video => {
+    const outputDirectory = video.path.split(video.name)[0];
+    const outputName = video.name.split('.')[0]
+    const outputPath = `${outputDirectory}${outputName}.${video.format}`;
+
+    ffmpeg(video.path)
+      .output(outputPath)
+      .on('progress', ({ timemark }) =>
+        mainWindow.webContents.send('conversion:progress', { video, timemark })
+      )
+      .on('end', () =>
+        mainWindow.webContents.send('conversion:end', { video, outputPath })
+      )
+      .run();
+  });
+});
+
+
+ipcMain.on('folder:open', (event, outputPath) => {
+  shell.showItemInFolder(outputPath);
+});
