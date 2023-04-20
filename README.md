@@ -60,6 +60,8 @@ Mastering Electron
 
 [Global Shortcut Module Docs Electron](https://www.electronjs.org/docs/latest/api/global-shortcut)
 
+[Power Monitor Docs Electron](https://www.electronjs.org/docs/latest/api/power-monitor)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -129,3 +131,5 @@ Mastering Electron
   });
 ```
 
+## powerMonitor
+- *** Can only be used on app ready

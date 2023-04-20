@@ -1,10 +1,11 @@
-const { app, BrowserWindow, session, globalShortcut } = require('electron');
+const electron = require('electron');
+const { app, BrowserWindow } = electron;
 
 let mainWindow;
 
 function createWindow() {
 
-  let ses = session.defaultSession;
+  // let ses = session.defaultSession;
 
   // let getCookies = () => {
   //   ses.cookies.get({ name: 'cookie1' })
@@ -29,10 +30,10 @@ function createWindow() {
   mainWindow.loadFile('index.html');
 
   /* This will fire even if your not on the application so make sure very unique */
-  globalShortcut.register('CommandOrControl+G', () => {
-    console.log("User pressed G")
-    globalShortcut.unregister('CommandOrControl+G')
-  });
+  // globalShortcut.register('CommandOrControl+G', () => {
+  //   console.log("User pressed G")
+  //   globalShortcut.unregister('CommandOrControl+G')
+  // });
 
   // mainWindow.webContents.on('did-finish-load', () => {
   //   /* Custom Dialog */
@@ -109,6 +110,15 @@ function createWindow() {
   /* Listen for window being closed */
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+
+  /* These are useful for if the computer falls asleep etc... */
+  electron.powerMonitor.on('resume', e => {
+    mainWindow = null
+  })
+
+  electron.powerMonitor.on('suspend', e => {
+    console.log("Saving some data")
   })
 }
 
