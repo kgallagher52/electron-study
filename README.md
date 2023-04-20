@@ -152,3 +152,23 @@ Mastering Electron
   /* Getting secondary display coordinates */
   console.log(`${displays[1].bounds.x} x ${displays[1].bounds.y}`);
 ```
+### Getting changes of monitors
+```js
+  /* Monitors or display changes */
+  screen.on('display-metrics-changed', (e, display, metricsChanged) => {
+    console.log(metricsChanged);
+  })
+```
+
+### Setting app to half of the primary window
+```js
+  let primaryDisplay = screen.getPrimaryDisplay();
+    mainWindow = new BrowserWindow({
+    /* Setting the window to be half of primary monitor */
+    width: primaryDisplay.size.width / 2, height: primaryDisplay.size.height,
+    x: primaryDisplay.bounds.x, y: primaryDisplay.bounds.y,
+    webPreferences: {
+      contextIsolation: false,
+      nodeIntegration: true
+    }
+```

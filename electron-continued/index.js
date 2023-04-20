@@ -8,14 +8,21 @@ function createWindow() {
   /* Working with screens */
   let displays = screen.getAllDisplays();
 
+  let primaryDisplay = screen.getPrimaryDisplay();
+
   /* Getting primary display size */
-  console.log(`${displays[0].size.width} x ${displays[0].size.height}`);
-  /* Getting primary display coordinates */
-  console.log(`${displays[0].bounds.x} x ${displays[0].bounds.y}`);
-  /* Getting secondary display size */
-  console.log(`${displays[1].size.width} x ${displays[1].size.height}`);
-  /* Getting secondary display coordinates */
-  console.log(`${displays[1].bounds.x} x ${displays[1].bounds.y}`);
+  // console.log(`${displays[0].size.width} x ${displays[0].size.height}`);
+  // /* Getting primary display coordinates */
+  // console.log(`${displays[0].bounds.x} x ${displays[0].bounds.y}`);
+  // /* Getting secondary display size */
+  // console.log(`${displays[1].size.width} x ${displays[1].size.height}`);
+  // /* Getting secondary display coordinates */
+  // console.log(`${displays[1].bounds.x} x ${displays[1].bounds.y}`);
+
+  // /* Monitors or display changes */
+  // screen.on('display-metrics-changed', (e, display, metricsChanged) => {
+  //   console.log(metricsChanged);
+  // })
 
   // let ses = session.defaultSession;
 
@@ -29,8 +36,9 @@ function createWindow() {
   // }
 
   mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    x: 100, y: 100,
+    /* Setting the window to be half of primary monitor */
+    width: primaryDisplay.size.width / 2, height: primaryDisplay.size.height,
+    x: primaryDisplay.bounds.x, y: primaryDisplay.bounds.y,
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true
