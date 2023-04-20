@@ -34,12 +34,24 @@ function createWindow() {
 
   /* Adding a download event */
   ses.on('will-download', (e, downloadItem, webContents) => {
-    console.log('Started Downloading:');
+
     let fileName = downloadItem.getFilename();
     let fileSize = downloadItem.getTotalBytes();
 
     /* Save this file to the desktop */
     downloadItem.setSavePath(app.getPath('desktop') + `/${fileName}`);
+
+    /* Watching Progress of downloaded item */
+    downloadItem.on('updated', (e, state) => {
+      let received = downloadItem.getReceivedBytes();
+      if (state === 'progressing' && received) {
+        /* Getting the percentage of progress */
+        let progress = Math.round((received / fileSize) * 100);
+        /* Setting the UI progress using webContents */
+        webContents.executeJavaScript(`window.progress.value = ${progress}`);
+      }
+    })
+
   });
 
   /* Deleting a cookie */
