@@ -49,8 +49,14 @@ Mastering Electron
 ## Helpful links
 
 [Original Documentation](https://docs.google.com/document/d/1qO9wbtwtzXhPTVeLaeYNcseZCwmie5hp5jIz68NACh4/edit#)
+
 [Udemy Course](https://www.udemy.com/course/master-electron/learn/lecture/6108194#overview)
+
 [Session Docs Electron](electronjs.org/docs/latest/api/session)
+
+[DownloadItem Docs Electron](https://www.electronjs.org/docs/latest/api/download-item#class-downloaditem)
+
+[Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
  - *** Session on Electron is the store for WebContents data
@@ -65,3 +71,4 @@ Mastering Electron
    // with empty object returns all cookies you can filter it down by adding cookie name into the object 
    ses.cookies.get({ name: 'cookie1' })
 ```
+### DownloadItem
