@@ -56,6 +56,8 @@ Mastering Electron
 
 [DownloadItem Docs Electron](https://www.electronjs.org/docs/latest/api/download-item#class-downloaditem)
 
+[Custom Dialog Docs Electron](https://www.electronjs.org/docs/latest/api/dialog)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -72,3 +74,41 @@ Mastering Electron
    ses.cookies.get({ name: 'cookie1' })
 ```
 ### DownloadItem
+
+### Creating Custom Dialog
+```js
+  mainWindow.webContents.on('did-finish-load', () => {
+   // First parameter optional without it won't be tied to the window
+    dialog.showOpenDialog(mainWindow, {
+      buttonLabel: 'Select a photo',
+      defaultPath: app.getPath('desktop')
+      // Adding more customizations to the dialog
+      properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
+    }).then(result => {
+      console.log(result)
+    })
+  })
+```
+### Creating Save Dialog
+```js
+  mainWindow.webContents.on('did-finish-load', () => {
+    dialog.showSaveDialog({}).then(result =>{
+      console.log(result)
+    })
+  })
+```
+### Creating Message Dialog
+```js
+  mainWindow.webContents.on('did-finish-load', () => {
+   const answers = ['Yes', 'No', 'Maybe'];
+
+    dialog.showMessageBox({
+      title: 'Message Box',
+      message: 'Please select an option',
+      detail: 'Message Details.',
+      buttons: answers
+    }).then(result => {
+      console.log(`User selected: ${answers[result.response]}`);
+    })
+  })
+```

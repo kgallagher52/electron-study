@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserWindow, session, dialog } = require('electron');
 
 let mainWindow;
 
@@ -28,31 +28,60 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    /* Custom Dialog */
+    // dialog.showOpenDialog(mainWindow, {
+    //   buttonLabel: 'Select a photo',
+    //   defaultPath: app.getPath('desktop'),
+    //   properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
+    // }).then(result => {
+    //   console.log(result)
+    // })
+    // /* Save Dialog */
+    // dialog.showSaveDialog({}).then(result =>{
+    //   console.log(result)
+    // })
+
+    /* Creating A Message Box */
+    const answers = ['Yes', 'No', 'Maybe'];
+
+    dialog.showMessageBox(mainWindow, {
+      title: 'Message Box',
+      message: 'Please select an option',
+      detail: 'Message Details.',
+      buttons: answers
+    }).then(result => {
+      console.log(`User selected: ${answers[result.response]}`);
+    })
+
+  })
+
   /* Load github and wait for it to finish then log all the cookies out */
   // mainWindow.loadURL('https://github.com');
 
 
   /* Adding a download event */
-  ses.on('will-download', (e, downloadItem, webContents) => {
+  // ses.on('will-download', (e, downloadItem, webContents) => {
 
-    let fileName = downloadItem.getFilename();
-    let fileSize = downloadItem.getTotalBytes();
+  //   let fileName = downloadItem.getFilename();
+  //   let fileSize = downloadItem.getTotalBytes();
 
-    /* Save this file to the desktop */
-    downloadItem.setSavePath(app.getPath('desktop') + `/${fileName}`);
+  /* Save this file to the desktop */
+  // downloadItem.setSavePath(app.getPath('desktop') + `/${fileName}`);
 
-    /* Watching Progress of downloaded item */
-    downloadItem.on('updated', (e, state) => {
-      let received = downloadItem.getReceivedBytes();
-      if (state === 'progressing' && received) {
-        /* Getting the percentage of progress */
-        let progress = Math.round((received / fileSize) * 100);
-        /* Setting the UI progress using webContents */
-        webContents.executeJavaScript(`window.progress.value = ${progress}`);
-      }
-    })
+  /* Watching Progress of downloaded item */
+  // downloadItem.on('updated', (e, state) => {
+  //   let received = downloadItem.getReceivedBytes();
+  //   if (state === 'progressing' && received) {
+  //     /* Getting the percentage of progress */
+  //     let progress = Math.round((received / fileSize) * 100);
+  //     /* Setting the UI progress using webContents */
+  //     webContents.executeJavaScript(`window.progress.value = ${progress}`);
+  //   }
+  // })
 
-  });
+  // });
 
   /* Deleting a cookie */
   // ses.cookies.remove('https://keatongallagher.com', 'cookie1').then(() => {
