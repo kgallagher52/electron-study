@@ -1,9 +1,21 @@
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, screen } = electron;
 
 let mainWindow;
 
 function createWindow() {
+
+  /* Working with screens */
+  let displays = screen.getAllDisplays();
+
+  /* Getting primary display size */
+  console.log(`${displays[0].size.width} x ${displays[0].size.height}`);
+  /* Getting primary display coordinates */
+  console.log(`${displays[0].bounds.x} x ${displays[0].bounds.y}`);
+  /* Getting secondary display size */
+  console.log(`${displays[1].size.width} x ${displays[1].size.height}`);
+  /* Getting secondary display coordinates */
+  console.log(`${displays[1].bounds.x} x ${displays[1].bounds.y}`);
 
   // let ses = session.defaultSession;
 

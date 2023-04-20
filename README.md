@@ -62,6 +62,8 @@ Mastering Electron
 
 [Power Monitor Docs Electron](https://www.electronjs.org/docs/latest/api/power-monitor)
 
+[Screen module Docs Electron](https://www.electronjs.org/docs/latest/api/screen)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -133,3 +135,20 @@ Mastering Electron
 
 ## powerMonitor
 - *** Can only be used on app ready
+## screen module
+- *** Can only be used on app ready
+- use this to get screen information of the users computer
+
+### getting primary screen display and secondary screen display with coordinates of each
+```js
+/* Working with screens */
+   let displays = screen.getAllDisplays();
+/* Getting primary display size */
+  console.log(`${displays[0].size.width} x ${displays[0].size.height}`);
+  /* Getting primary display coordinates */
+  console.log(`${displays[0].bounds.x} x ${displays[0].bounds.y}`);
+  /* Getting secondary display size */
+  console.log(`${displays[1].size.width} x ${displays[1].size.height}`);
+  /* Getting secondary display coordinates */
+  console.log(`${displays[1].bounds.x} x ${displays[1].bounds.y}`);
+```
