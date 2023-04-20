@@ -43,3 +43,15 @@ Mastering Electron
     - Show details about the video waiting to be converted(duration, file format): Use FFMPEG cli
     - Convert a video: Use FFMPEG cli
     - Show progress bar of conversion process: Handle feedback from FFMPEG cli
+
+# Secondary tutorial 
+
+## Helpful links
+
+[Original Documentation](https://docs.google.com/document/d/1qO9wbtwtzXhPTVeLaeYNcseZCwmie5hp5jIz68NACh4/edit#)
+[Udemy Course](https://www.udemy.com/course/master-electron/learn/lecture/6108194#overview)
+
+## Sessions 
+ - *** Session on Electron is the store for WebContents data
+ - *** Session is shared across multiple web windows
+ - *** session.defaultSession - is recommended use of session
