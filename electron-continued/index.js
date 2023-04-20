@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session, dialog } = require('electron');
+const { app, BrowserWindow, session, globalShortcut } = require('electron');
 
 let mainWindow;
 
@@ -28,34 +28,39 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 
+  /* This will fire even if your not on the application so make sure very unique */
+  globalShortcut.register('CommandOrControl+G', () => {
+    console.log("User pressed G")
+    globalShortcut.unregister('CommandOrControl+G')
+  });
 
-  mainWindow.webContents.on('did-finish-load', () => {
-    /* Custom Dialog */
-    // dialog.showOpenDialog(mainWindow, {
-    //   buttonLabel: 'Select a photo',
-    //   defaultPath: app.getPath('desktop'),
-    //   properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
-    // }).then(result => {
-    //   console.log(result)
-    // })
-    // /* Save Dialog */
-    // dialog.showSaveDialog({}).then(result =>{
-    //   console.log(result)
-    // })
+  // mainWindow.webContents.on('did-finish-load', () => {
+  //   /* Custom Dialog */
+  //   // dialog.showOpenDialog(mainWindow, {
+  //   //   buttonLabel: 'Select a photo',
+  //   //   defaultPath: app.getPath('desktop'),
+  //   //   properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
+  //   // }).then(result => {
+  //   //   console.log(result)
+  //   // })
+  //   // /* Save Dialog */
+  //   // dialog.showSaveDialog({}).then(result =>{
+  //   //   console.log(result)
+  //   // })
 
-    /* Creating A Message Box */
-    const answers = ['Yes', 'No', 'Maybe'];
+  //   /* Creating A Message Box */
+  //   const answers = ['Yes', 'No', 'Maybe'];
 
-    dialog.showMessageBox(mainWindow, {
-      title: 'Message Box',
-      message: 'Please select an option',
-      detail: 'Message Details.',
-      buttons: answers
-    }).then(result => {
-      console.log(`User selected: ${answers[result.response]}`);
-    })
+  //   dialog.showMessageBox(mainWindow, {
+  //     title: 'Message Box',
+  //     message: 'Please select an option',
+  //     detail: 'Message Details.',
+  //     buttons: answers
+  //   }).then(result => {
+  //     console.log(`User selected: ${answers[result.response]}`);
+  //   })
 
-  })
+  // })
 
   /* Load github and wait for it to finish then log all the cookies out */
   // mainWindow.loadURL('https://github.com');

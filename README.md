@@ -58,6 +58,8 @@ Mastering Electron
 
 [Custom Dialog Docs Electron](https://www.electronjs.org/docs/latest/api/dialog)
 
+[Global Shortcut Module Docs Electron](https://www.electronjs.org/docs/latest/api/global-shortcut)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -74,8 +76,8 @@ Mastering Electron
    ses.cookies.get({ name: 'cookie1' })
 ```
 ### DownloadItem
-
 ### Creating Custom Dialog
+
 ```js
   mainWindow.webContents.on('did-finish-load', () => {
    // First parameter optional without it won't be tied to the window
@@ -90,6 +92,7 @@ Mastering Electron
   })
 ```
 ### Creating Save Dialog
+
 ```js
   mainWindow.webContents.on('did-finish-load', () => {
     dialog.showSaveDialog({}).then(result =>{
@@ -98,6 +101,7 @@ Mastering Electron
   })
 ```
 ### Creating Message Dialog
+
 ```js
   mainWindow.webContents.on('did-finish-load', () => {
    const answers = ['Yes', 'No', 'Maybe'];
@@ -112,3 +116,16 @@ Mastering Electron
     })
   })
 ```
+
+## Accelerators & globalShortcut
+
+- *** globalShortcut works even if you are not on the application so make sure you know what your doing before making shortcut that will be on the whole computer.
+
+### Setting multiple keys or and unregister
+```js
+  globalShortcut.register('CommandOrControl+G', () => {
+   console.log("User pressed G")
+   globalShortcut.unregister('CommandOrControl+G')
+  });
+```
+
