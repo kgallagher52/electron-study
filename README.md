@@ -50,8 +50,18 @@ Mastering Electron
 
 [Original Documentation](https://docs.google.com/document/d/1qO9wbtwtzXhPTVeLaeYNcseZCwmie5hp5jIz68NACh4/edit#)
 [Udemy Course](https://www.udemy.com/course/master-electron/learn/lecture/6108194#overview)
+[Session Docs Electron](electronjs.org/docs/latest/api/session)
 
 ## Sessions 
  - *** Session on Electron is the store for WebContents data
  - *** Session is shared across multiple web windows
  - *** session.defaultSession - is recommended use of session
+
+### Cookies 
+ - Cookies with expirationDate do not get saved with session: true
+ - Passing 
+```js
+   ses.cookies.get({}) 
+   // with empty object returns all cookies you can filter it down by adding cookie name into the object 
+   ses.cookies.get({ name: 'cookie1' })
+```
