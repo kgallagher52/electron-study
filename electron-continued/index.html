@@ -23,8 +23,12 @@
   <button onclick="zoomDown()">Decrease Zoom</button>
   <button onclick="zoomReset()">Reset Zoom</button>
 
+  <!-- /* Desktop Capturer */ -->
+  <img src="" id="screenshot" alt="screenshot">
+  <button id="screenshotButton">Get screenshot</button>
+
   <script>
-    const { webFrame } = require('electron');
+    const { webFrame, desktopCapturer } = require('electron');
 
     const zoomUp = () => {
       webFrame.setZoomLevel(webFrame.getZoomLevel() + 1)
@@ -38,7 +42,10 @@
       webFrame.setZoomLevel(1)
     }
     /* linked resources in the web contents being used */
-    console.log(webFrame.getResourceUsage());
+    // console.log(webFrame.getResourceUsage());
+
+    require('./renderer.js')
+
   </script>
 </body>
 

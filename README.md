@@ -66,6 +66,8 @@ Mastering Electron
 
 [WebFrame Docs Electron](https://www.electronjs.org/docs/latest/api/web-frame)
 
+[desktopCapture Docs Electron](https://www.electronjs.org/docs/latest/api/desktop-capturer)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -188,3 +190,6 @@ Mastering Electron
 
 ### WebFrame
 - module to use if we need to make some content rendering adjustments or sandbox some of the applications js this is the module to use
+
+### desktopCapturer
+- *** this is to get screen information from user and can only be used in the main process
