@@ -172,3 +172,5 @@ Mastering Electron
       nodeIntegration: true
     }
 ```
+
+## Section Four Renderer process API
