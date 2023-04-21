@@ -184,3 +184,7 @@ Mastering Electron
 
  *** deprecated 
  Prior to Electron 15, window.open was by default shimmed to use BrowserWindowProxy. This meant that window.open('about:blank') did not work to open synchronously scriptable child windows, among other incompatibilities. Since Electron 15, nativeWindowOpen has been enabled by default.
+
+
+### WebFrame
+- module to use if we need to make some content rendering adjustments or sandbox some of the applications js this is the module to use
