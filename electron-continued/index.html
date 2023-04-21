@@ -17,17 +17,26 @@
 </head>
 
 <body>
+  <img src="https://placekitten.com/450/300" alt="kitty kat">
+  <br>
+  <button onclick="zoomUp()">Increase Zoom</button>
+  <button onclick="zoomDown()">Decrease Zoom</button>
+  <button onclick="zoomReset()">Reset Zoom</button>
 
-  <h1>Hello Electron!</h1>
-  <p>Build cross-platform desktop apps with JavaScript, HTML, and CSS</p>
-  <a download href="https://file-examples.com/storage/feee5c69f0643c59da6bf13/2017/04/file_example_MP4_1280_10MG.mp4">
-    <h3>Download</h3>
-  </a>
-  <!-- Creating progress bar on ui -->
-  <progress value="0" max="100" id="progress"></progress>
   <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
+    const { webFrame } = require('electron');
+
+    const zoomUp = () => {
+      webFrame.setZoomLevel(webFrame.getZoomLevel() + 1)
+    }
+
+    const zoomDown = () => {
+      webFrame.setZoomLevel(webFrame.getZoomLevel() - 1)
+    }
+
+    const zoomReset = () => {
+      webFrame.setZoomLevel(1)
+    }
   </script>
 </body>
 

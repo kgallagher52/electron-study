@@ -2,7 +2,7 @@
   "name": "videoinfo",
   "version": "1.0.0",
   "description": "",
-  "main": "rendererProcess.js",
+  "main": "index.js",
   "scripts": {
     "start": "electron .",
     "watch": "nodemon --exec electron ."

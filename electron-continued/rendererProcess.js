@@ -13,7 +13,7 @@ function createWindow() {
     },
   })
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
   mainWindow.loadFile('index.html');
 
   /* Listen for window being closed */

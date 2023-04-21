@@ -64,6 +64,8 @@ Mastering Electron
 
 [Screen module Docs Electron](https://www.electronjs.org/docs/latest/api/screen)
 
+[WebFrame Docs Electron](https://www.electronjs.org/docs/latest/api/web-frame)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -174,3 +176,11 @@ Mastering Electron
 ```
 
 ## Section Four Renderer process API
+ -  nodeIntegration: true - this allows us to get access to node apis from our js files being loaded in the html file
+
+ ### BrowserWindowProxy
+
+[Browser Proxy Docs Electron](https://www.electronjs.org/blog/electron-18-0#removed-nativewindowopen)
+
+ *** deprecated 
+ Prior to Electron 15, window.open was by default shimmed to use BrowserWindowProxy. This meant that window.open('about:blank') did not work to open synchronously scriptable child windows, among other incompatibilities. Since Electron 15, nativeWindowOpen has been enabled by default.
