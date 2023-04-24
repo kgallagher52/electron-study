@@ -32,6 +32,14 @@ function createWindow() {
   })
 }
 
+
+/* Setting up a synchronous message vs default which is asynchronous */
+ipcMain.on('sync-message', (e, args) => {
+  console.log(args);
+  /* this demands a response and will block the remaining processes from happening till we get the response */
+  e.returnValue = 'A sync response from the main process!'
+})
+
 /* ipcMain event */
 ipcMain.on('channel1', (e, args) => {
   /* Finding where the message came from */

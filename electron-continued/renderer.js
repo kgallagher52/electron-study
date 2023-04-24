@@ -24,7 +24,11 @@ const { desktopCapturer, ipcRenderer } = require('electron');
 /* Sending a message to the main process */
 document.getElementById('talk').addEventListener('click', e => {
   e.preventDefault();
-  ipcRenderer.send('channel1', 'Hello from main window!');
+  // ipcRenderer.send('channel1', 'Hello from main window!');
+
+  /* Sending Sync message */
+  let res = ipcRenderer.sendSync('sync-message', 'waiting for response...');
+  console.log(res)
 });
 
 /* Receiving a response from the main process */
@@ -34,5 +38,5 @@ ipcRenderer.on('channel1-response', (e, args) => {
 
 /* Receiving a response from the main process message directly sent */
 ipcRenderer.on('mailbox', (e, args) => {
-  console.log(`Response from main process: ${args}`);
+  console.log(args);
 })
