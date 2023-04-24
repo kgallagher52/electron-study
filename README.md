@@ -209,5 +209,22 @@ Mastering Electron
 
  - Channels are first parameter in ipcMain.on they are unique identifiers for what to listen for on messages
  
- - *** by default ipc is asynchronous 
+ - *** by default ipc is asynchronous
+
+
+ ### Sending a message directly to a window
+ - *** You can only do this after the content has loaded
+ ```js
+      /* Sending a message directly to the web window */
+      mainWindow.webContents.on('did-finish-load', e => {
+         mainWindow.webContents.send('mailbox', 'You have mail!')
+      })
+
+      /* On the renderer process we have to add a listener for this */
+      /* Receiving a response from the main process message directly sent */
+      ipcRenderer.on('mailbox', (e, args) => {
+      console.log(`Response from main process: ${args}`);
+      })
+ 
+ ```
 

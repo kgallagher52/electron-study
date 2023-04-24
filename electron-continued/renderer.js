@@ -31,3 +31,8 @@ document.getElementById('talk').addEventListener('click', e => {
 ipcRenderer.on('channel1-response', (e, args) => {
   console.log(`Response from main process: ${args}`);
 })
+
+/* Receiving a response from the main process message directly sent */
+ipcRenderer.on('mailbox', (e, args) => {
+  console.log(`Response from main process: ${args}`);
+})

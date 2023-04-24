@@ -16,6 +16,12 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
   mainWindow.loadFile('index.html');
 
+
+  /* Sending a message directly to the web window */
+  mainWindow.webContents.on('did-finish-load', e => {
+    mainWindow.webContents.send('mailbox', 'You have mail!')
+  })
+
   /* Listen for window being closed */
   mainWindow.on('closed', () => {
     mainWindow = null
