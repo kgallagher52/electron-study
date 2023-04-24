@@ -2,7 +2,7 @@
   "name": "master-electron-course",
   "version": "1.0.0",
   "description": "Master Electron",
-  "main": "rendererProcess.js",
+  "main": "ipcCommunication.js",
   "scripts": {
     "start": "electron .",
     "watch": "nodemon --exec electron .",

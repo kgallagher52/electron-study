@@ -193,3 +193,14 @@ Mastering Electron
 
 ### desktopCapturer
 - *** this is to get screen information from user and can only be used in the main process
+
+
+## Section Five IPC communication
+- Inter-Process Communication
+
+### Two main parts with IPC communication  
+
+ 1. ipcMain module - this is for handling on the main process
+ 2. ipcRenderer module - this is for handling communication on the web views or rendering process
+ - *** These two modules need one another to complete communication between electron process and it's windows or rendering process
+ 
