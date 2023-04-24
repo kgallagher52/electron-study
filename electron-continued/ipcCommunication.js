@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 
 let mainWindow;
 
@@ -21,6 +21,12 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+/* ipcMain event */
+ipcMain.on('channel1', (e, args) => {
+  console.log(args);
+});
+
 
 // Electron `app` is ready
 app.on('ready', createWindow)

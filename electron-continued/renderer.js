@@ -2,7 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-const { desktopCapturer } = require('electron');
+const { desktopCapturer, ipcRenderer } = require('electron');
 
 
 /* Getting progress element from html */
@@ -10,11 +10,17 @@ const { desktopCapturer } = require('electron');
 
 
 /* Desktop Capturer */
-document.getElementById('screenshotButton').addEventListener('click', () => {
-  desktopCapturer.getSources({ types: ['screen'] }).then(sources => {
-    console.log(sources)
-    document.getElementById('screenshot').src = sources[0].thumbnail.toDataURL()
-  }).catch(error => {
-    console.log(error);
-  });
+// document.getElementById('screenshotButton').addEventListener('click', () => {
+//   desktopCapturer.getSources({ types: ['screen'] }).then(sources => {
+//     console.log(sources)
+//     document.getElementById('screenshot').src = sources[0].thumbnail.toDataURL()
+//   }).catch(error => {
+//     console.log(error);
+//   });
+// })
+
+/* ipcRenderer */
+document.getElementById('talk').addEventListener('click', e => {
+  e.preventDefault();
+  ipcRenderer.send('channel1', 'Hello from main window!');
 })

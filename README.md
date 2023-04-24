@@ -68,6 +68,8 @@ Mastering Electron
 
 [desktopCapture Docs Electron](https://www.electronjs.org/docs/latest/api/desktop-capturer)
 
+[ipcMain Docs Electron](https://www.electronjs.org/docs/latest/api/ipc-main)
+
 [Resource For downloading files](https://file-examples.com/)
 
 ## Sessions 
@@ -202,5 +204,9 @@ Mastering Electron
 
  1. ipcMain module - this is for handling on the main process
  2. ipcRenderer module - this is for handling communication on the web views or rendering process
+
  - *** These two modules need one another to complete communication between electron process and it's windows or rendering process
- 
+
+ - Channels are first parameter in ipcMain.on they are unique identifiers for what to listen for on messages
+
+
