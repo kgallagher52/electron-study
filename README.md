@@ -208,5 +208,6 @@ Mastering Electron
  - *** These two modules need one another to complete communication between electron process and it's windows or rendering process
 
  - Channels are first parameter in ipcMain.on they are unique identifiers for what to listen for on messages
-
+ 
+ - *** by default ipc is asynchronous 
 

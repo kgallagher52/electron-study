@@ -24,6 +24,8 @@ function createWindow() {
 
 /* ipcMain event */
 ipcMain.on('channel1', (e, args) => {
+  /* Finding where the message came from */
+  e.sender.send('channel1-response', 'Message received on "channel1", Thank you!');
   console.log(args);
 });
 
