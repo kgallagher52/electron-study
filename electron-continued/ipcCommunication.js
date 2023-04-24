@@ -19,7 +19,11 @@ function createWindow() {
 
   /* Sending a message directly to the web window */
   mainWindow.webContents.on('did-finish-load', e => {
-    mainWindow.webContents.send('mailbox', 'You have mail!')
+    mainWindow.webContents.send('mailbox', {
+      from: 'Keaton',
+      email: 'myfakeemail@fake.com',
+      priority: 1
+    })
   })
 
   /* Listen for window being closed */
