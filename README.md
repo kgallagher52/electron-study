@@ -212,7 +212,8 @@ Mastering Electron
  - *** by default ipc is asynchronous
 
 
- ### Sending a message directly to a window
+### ipcMain & ipcRenderer
+ #### Sending a message directly to a window
  - *** You can only do this after the content has loaded
  ```js
       /* Sending a message directly to the web window */
@@ -227,4 +228,31 @@ Mastering Electron
       })
  
  ```
+
+ #### Sending synchronous messages
+ - *** Important to know this will stop all other processes on the window till the response is received
+ ```js
+  /* main process code */
+  /* Setting up a synchronous message vs default which is asynchronous */
+   ipcMain.on('sync-message', (e, args) => {
+      console.log(args);
+      /* this demands a response and will block the remaining processes from happening till we get the response */
+      e.returnValue = 'A sync response from the main process!'
+   })
+
+   /* Renderer process code */ 
+   /* Sending a message to the main process */
+document.getElementById('talk').addEventListener('click', e => {
+  e.preventDefault();
+  // ipcRenderer.send('channel1', 'Hello from main window!');
+
+  /* Sending Sync message */
+  let res = ipcRenderer.sendSync('sync-message', 'waiting for response...');
+  console.log(res)
+});
+ ```
+
+ ### Remote Module
+ 
+
 
